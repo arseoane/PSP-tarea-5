@@ -1,13 +1,25 @@
-import java.lang.Process;
 import java.util.Scanner;
 
 public class Lanzador {
-    public static void main(String[] args){
-        //Declaración Scanner para poder pedirle al usuario valores
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
 
-        //Solicitamos al usuario números
-        System.out.print("> ");
-        ProcessBuilder pb = new ProcessBuilder("factor",sc.next());
+    }
+
+    public static void factorizar(long n) {
+        while (n % 2 == 0) {
+            System.out.print(" 2");
+            n /= 2;
+        }
+
+        for (long i = 3; i * i <= n; i += 2) {
+            while (n % i == 0) {
+                System.out.print(" " + i);
+                n /= i;
+            }
+        }
+
+        if (n > 2) {
+            System.out.print(" " + n);
+        }
     }
 }
