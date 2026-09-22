@@ -3,8 +3,11 @@ import java.util.Scanner;
 
 public class Lanzador {
     public static void main(String[] args){
+        //Declaración Scanner para poder pedirle al usuario valores
         Scanner sc = new Scanner(System.in);
-        System.out.print(">");
+
+        //Solicitamos al usuario números
+        System.out.print("> ");
         ProcessBuilder pb = new ProcessBuilder("factor",sc.next());
     }
 }
