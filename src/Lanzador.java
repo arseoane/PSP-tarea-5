@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 public class Lanzador {
     public static void factorizar(long n) {
         try{
-            ProcessBuilder pb = new ProcessBuilder("wsl","factor", String.valueOf(n));
+            ProcessBuilder pb = new ProcessBuilder("factor", String.valueOf(n));
 
             // 2. Iniciar el proceso
             Process proceso = pb.start();
