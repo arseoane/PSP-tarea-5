@@ -13,15 +13,7 @@ public class Interfaz {
 
                 try {
                     long numero = Long.parseLong(entrada);
-
-                    if (numero <= 1) {
-                        System.out.println("Introduce un número mayor que 1.");
-                        continue;
-                    }
-
-                    System.out.print(numero + ":");
                     Lanzador.factorizar(numero);
-                    System.out.println();
 
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
