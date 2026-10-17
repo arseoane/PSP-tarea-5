@@ -24,7 +24,7 @@ public class Interfaz {
                     System.out.println();
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Por favor, introduce un número entero válido (o 'salir' para terminar).");
+                    e.printStackTrace();
                 }
             }
         }

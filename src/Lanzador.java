@@ -1,25 +1,31 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Lanzador {
-    public static void main(String[] args) {
-
-    }
-
     public static void factorizar(long n) {
-        while (n % 2 == 0) {
-            System.out.print(" 2");
-            n /= 2;
-        }
+        try{
+            ProcessBuilder pb = new ProcessBuilder("wsl","factor", String.valueOf(n));
 
-        for (long i = 3; i * i <= n; i += 2) {
-            while (n % i == 0) {
-                System.out.print(" " + i);
-                n /= i;
+            // 2. Iniciar el proceso
+            Process proceso = pb.start();
+
+            // 3. Leer la salida estándar del proceso
+            BufferedReader lector = new BufferedReader(
+                    new InputStreamReader(proceso.getInputStream())
+            );
+
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                System.out.println(linea);
             }
-        }
 
-        if (n > 2) {
-            System.out.print(" " + n);
+            // 4. Esperar a que termine y obtener el código de salida
+            int codigoSalida = proceso.waitFor();
+            System.out.println("Proceso finalizado con código: " + codigoSalida);
+        }
+        catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
