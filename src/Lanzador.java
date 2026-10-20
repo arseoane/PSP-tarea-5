@@ -3,29 +3,32 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Lanzador {
-    public static void factorizar(long n) {
-        try{
-            ProcessBuilder pb = new ProcessBuilder("factor", String.valueOf(n));
+    public static void factorizar(String n) throws IOException {
+        ProcessBuilder pb = new ProcessBuilder("factor", String.valueOf(n));
 
-            // 2. Iniciar el proceso
-            Process proceso = pb.start();
+        Process proceso = null;
+        proceso = pb.start();
 
-            // 3. Leer la salida estándar del proceso
-            BufferedReader lector = new BufferedReader(
-                    new InputStreamReader(proceso.getInputStream())
-            );
+        BufferedReader lector = new BufferedReader(
+                new InputStreamReader(proceso.getInputStream())
+        );
 
-            String linea;
-            while ((linea = lector.readLine()) != null) {
-                System.out.println(linea);
+        String linea;
+        while (true) {
+            try {
+                if (!((linea = lector.readLine()) != null)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+            System.out.println(linea);
+        }
 
-            // 4. Esperar a que termine y obtener el código de salida
-            int codigoSalida = proceso.waitFor();
-            System.out.println("Proceso finalizado con código: " + codigoSalida);
+        int codigoSalida = 0;
+        try {
+            codigoSalida = proceso.waitFor();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Proceso finalizado con código: " + codigoSalida);
     }
 }

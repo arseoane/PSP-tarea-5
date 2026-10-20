@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Interfaz {
@@ -12,11 +13,10 @@ public class Interfaz {
                 }
 
                 try {
-                    long numero = Long.parseLong(entrada);
-                    Lanzador.factorizar(numero);
+                    Lanzador.factorizar(entrada);
 
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
