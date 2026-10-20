@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 public class Lanzador {
     public static void factorizar(String n) throws IOException {
         ProcessBuilder pb = new ProcessBuilder("factor", String.valueOf(n));
+        pb.redirectErrorStream(true);
 
         Process proceso = null;
         proceso = pb.start();
